@@ -1,0 +1,138 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-08-08T07:18:58.682Z",
+    "end": "2025-08-08T07:19:21.367Z",
+    "duration": 22685,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "04e15618-be3a-48ab-a0d0-c40e60447921",
+      "title": "",
+      "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Duplicate-proyects.spec.js",
+      "file": "\\tests\\Duplicate-proyects.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8add8f8d-9e44-40ea-8c8f-51b32337a362",
+          "title": "Funcionalidad de Duplicación de Proyecto en Timecamp",
+          "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Duplicate-proyects.spec.js",
+          "file": "\\tests\\Duplicate-proyects.spec.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Funcionalidad de Duplicación de Proyecto en Timecamp\"",
+              "fullTitle": "Funcionalidad de Duplicación de Proyecto en Timecamp \"before all\" hook in \"Funcionalidad de Duplicación de Proyecto en Timecamp\"",
+              "timedOut": false,
+              "duration": 813,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeService(service)\n    .build();",
+              "err": {},
+              "uuid": "635c6059-a946-4340-8656-4529d45f2d78",
+              "parentUUID": "8add8f8d-9e44-40ea-8c8f-51b32337a362",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Funcionalidad de Duplicación de Proyecto en Timecamp\"",
+              "fullTitle": "Funcionalidad de Duplicación de Proyecto en Timecamp \"after all\" hook in \"Funcionalidad de Duplicación de Proyecto en Timecamp\"",
+              "timedOut": false,
+              "duration": 184,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driver) await driver.quit();",
+              "err": {},
+              "uuid": "3270f077-ab16-4266-a709-1e8e762a9e94",
+              "parentUUID": "8add8f8d-9e44-40ea-8c8f-51b32337a362",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Debe duplicar el primer proyecto visible correctamente",
+              "fullTitle": "Funcionalidad de Duplicación de Proyecto en Timecamp Debe duplicar el primer proyecto visible correctamente",
+              "timedOut": false,
+              "duration": 21679,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "console.log('\\n--- INICIANDO PRUEBA DE DUPLICACIÓN DE PROYECTO ---');\n// Paso 1: Iniciar sesión\nawait driver.get('https://app.timecamp.com/auth/login');\nconst emailInput = await driver.wait(until.elementLocated(By.id('email')), 15000);\nconst passwordInput = await driver.wait(until.elementLocated(By.id('pass_hash')), 15000);\nawait emailInput.sendKeys('penp57981@gmail.com');\nawait passwordInput.sendKeys('Preubatarea4...');\nconst loginButton = await driver.wait(until.elementLocated(By.css('button[type=\"submit\"]')), 10000);\nawait loginButton.click();\nawait driver.wait(until.urlContains('https://app.timecamp.com/app#/timesheets/timer'), 20000);\nconsole.log('✅ Inicio de sesión exitoso.');\nawait sleep(2000);\n// Paso 2: Navegar a proyectos\nawait driver.executeScript(`\n  const mainMenuDiv = document.querySelector('div#main-menu-v');\n  if (!mainMenuDiv) throw new Error('No existe div#main-menu-v');\n  const sidebar = mainMenuDiv.querySelector('web-main-sidebar');\n  if (!sidebar) throw new Error('No existe web-main-sidebar');\n  const shadowRoot = sidebar.shadowRoot;\n  if (!shadowRoot) throw new Error('No existe shadowRoot en web-main-sidebar');\n  const projectsLink = shadowRoot.querySelector('a[href=\"/time_tracking/manage\"]');\n  if (!projectsLink) throw new Error('No se encontró enlace de proyectos');\n  projectsLink.click();\n`);\nawait driver.wait(until.urlContains('/time_tracking/manage'), 15000);\nconsole.log('✅ Se ha llegado a la página de Proyectos.');\nawait takeScreenshot('projects-page-before-duplicate');\nawait sleep(2000);\n// Paso 3: Hacer click en el primer proyecto para abrir menú lateral\nconst firstProjectDiv = await driver.wait(\n    until.elementLocated(By.css('div.tc-ui-task-name.tc-ui-task-name-clickable')),\n    15000\n);\nawait firstProjectDiv.click();\nconsole.log('✅ Se hizo click en el primer proyecto para abrir menú lateral.');\nawait sleep(1500);\n// Paso 4: Hacer click en el botón con data-testid=\"view-more-actions\" para abrir menú desplegable\nconst menuButton = await driver.wait(\n    until.elementLocated(By.css('button[data-testid=\"view-more-actions\"]')),\n    10000\n);\nawait menuButton.click();\nconsole.log('✅ Se hizo click en el botón de más acciones para desplegar menú.');\nawait sleep(1500);\nawait takeScreenshot('menu-more-actions-opened');\n// Paso 5: Hacer click en el enlace \"Duplicate\" dentro del menú desplegable\n// El selector para duplicar es el que tiene clase 'task-btn-clone' y visible (display: block)\nconst duplicateLink = await driver.wait(\n    until.elementLocated(By.css('a.task-btn-clone[style*=\"display: block\"]')),\n    10000\n);\nawait duplicateLink.click();\nconsole.log('✅ Se hizo click en \"Duplicate\" para abrir modal de confirmación.');\nawait sleep(1500);\nawait takeScreenshot('duplicate-modal-opened');\n// Paso 6: En el modal, hacer click en el botón \"OK\" para confirmar duplicación\nconst confirmDuplicateBtn = await driver.wait(\n    until.elementLocated(By.css('button.btn.btn-success[data-bb-handler=\"confirm\"]')),\n    10000\n);\nawait confirmDuplicateBtn.click();\nconsole.log('✅ Se hizo click en \"OK\" para confirmar duplicación.');\nawait sleep(3000); // Pausa para que se complete la duplicación\nawait takeScreenshot('project-duplicated');\nconsole.log('--- PRUEBA DE DUPLICACIÓN DE PROYECTO FINALIZADA ---');",
+              "err": {},
+              "uuid": "6ce78e56-54eb-4370-a59b-4860693d6571",
+              "parentUUID": "8add8f8d-9e44-40ea-8c8f-51b32337a362",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6ce78e56-54eb-4370-a59b-4860693d6571"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 21679,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 120000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 30000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}

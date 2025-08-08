@@ -1,0 +1,21 @@
+{
+  "name": "tarea-4-selenium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "test": "mocha --reporter mochawesome --timeout 30000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.2.1",
+    "mocha": "^11.7.1",
+    "selenium-webdriver": "^4.34.0"
+  },
+  "devDependencies": {
+    "chromedriver": "^138.0.5",
+    "mochawesome": "^7.1.3"
+  }
+}
