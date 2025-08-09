@@ -33,7 +33,7 @@ describe('Funcionalidad de Inicio de Sesión en Timecamp', function() {
             }
             const screenshotPath = path.join(screenshotDir, `${name}.png`);
             fs.writeFileSync(screenshotPath, image, 'base64');
-            console.log(`📸 Captura guardada: ${screenshotPath}`);
+            console.log(`Captura guardada: ${screenshotPath}`);
         } catch (error) {
             console.error(`Error al tomar captura ${name}:`, error);
         }
