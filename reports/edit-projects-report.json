@@ -1,0 +1,142 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-08-08T23:44:32.290Z",
+    "end": "2025-08-08T23:44:51.938Z",
+    "duration": 19648,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "574a2954-88d5-41f5-9883-284065e065e5",
+      "title": "",
+      "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Edit-proyects.spec.js",
+      "file": "\\tests\\Edit-proyects.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ba96d1a4-3100-4419-85c9-d061d65ce788",
+          "title": "Funcionalidad de Edición de Proyecto en Timecamp",
+          "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Edit-proyects.spec.js",
+          "file": "\\tests\\Edit-proyects.spec.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Funcionalidad de Edición de Proyecto en Timecamp\"",
+              "fullTitle": "Funcionalidad de Edición de Proyecto en Timecamp \"before all\" hook in \"Funcionalidad de Edición de Proyecto en Timecamp\"",
+              "timedOut": false,
+              "duration": 666,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeService(service)\n    .build();",
+              "err": {},
+              "uuid": "948de09b-e229-424a-8733-43377364766a",
+              "parentUUID": "ba96d1a4-3100-4419-85c9-d061d65ce788",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Funcionalidad de Edición de Proyecto en Timecamp\"",
+              "fullTitle": "Funcionalidad de Edición de Proyecto en Timecamp \"after all\" hook in \"Funcionalidad de Edición de Proyecto en Timecamp\"",
+              "timedOut": false,
+              "duration": 57,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driver) await driver.quit();",
+              "err": {},
+              "uuid": "35f5390f-bceb-4267-aa8d-6a99343af3e2",
+              "parentUUID": "ba96d1a4-3100-4419-85c9-d061d65ce788",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Debe editar el primer proyecto visible correctamente con pausas",
+              "fullTitle": "Funcionalidad de Edición de Proyecto en Timecamp Debe editar el primer proyecto visible correctamente con pausas",
+              "timedOut": false,
+              "duration": 18918,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "console.log('\\n--- INICIANDO PRUEBA DE EDICIÓN DE PROYECTO ---');\n// Inicias sesión (sin capturas aquí)\nawait driver.get('https://app.timecamp.com/auth/login');\nconst emailInput = await driver.wait(until.elementLocated(By.id('email')), 15000);\nconst passwordInput = await driver.wait(until.elementLocated(By.id('pass_hash')), 15000);\nawait emailInput.sendKeys('penp57981@gmail.com');\nawait passwordInput.sendKeys('Preubatarea4...');\nconst loginButton = await driver.wait(until.elementLocated(By.css('button[type=\"submit\"]')), 10000);\nawait loginButton.click();\nawait driver.wait(until.urlContains('https://app.timecamp.com/app#/timesheets/timer'), 20000);\nconsole.log('✅ Inicio de sesión exitoso.');\nawait sleep(2000);\n// Paso 1: Navegar a proyectos (click en link dentro del sidebar)\nawait driver.executeScript(`\n  const mainMenuDiv = document.querySelector('div#main-menu-v');\n  if (!mainMenuDiv) throw new Error('No existe div#main-menu-v');\n  const sidebar = mainMenuDiv.querySelector('web-main-sidebar');\n  if (!sidebar) throw new Error('No existe web-main-sidebar');\n  const shadowRoot = sidebar.shadowRoot;\n  if (!shadowRoot) throw new Error('No existe shadowRoot en web-main-sidebar');\n  const projectsLink = shadowRoot.querySelector('a[href=\"/time_tracking/manage\"]');\n  if (!projectsLink) throw new Error('No se encontró enlace de proyectos');\n  projectsLink.click();\n`);\nawait driver.wait(until.urlContains('/time_tracking/manage'), 15000);\nconsole.log('✅ Se ha llegado a la página de Proyectos.');\nawait takeScreenshot('01-projects-page-before-edit');\nawait sleep(2000);\n// Paso 2: Hacer click en el primer div clickeable de proyecto para abrir menú lateral\nconst firstProjectDiv = await driver.wait(\n    until.elementLocated(By.css('div.tc-ui-task-name.tc-ui-task-name-clickable')),\n    15000\n);\nawait firstProjectDiv.click();\nconsole.log('✅ Se hizo click en el primer proyecto para abrir menú.');\nawait takeScreenshot('02-project-menu-opened');\nawait sleep(1500);\n// Paso 3: Hacer click en el botón con data-testid=\"view-more-actions\" para abrir menú desplegable\nconst menuButton = await driver.wait(\n    until.elementLocated(By.css('button[data-testid=\"view-more-actions\"]')),\n    10000\n);\nawait menuButton.click();\nconsole.log('✅ Se hizo click en el botón de más acciones para desplegar menú.');\nawait sleep(1500);\nawait takeScreenshot('03-more-actions-menu');\n// Paso 4: Esperar el input para editar nombre y cambiar el nombre agregando \"2\"\nconst projectNameInput = await driver.wait(\n    until.elementLocated(By.css('input.form-control.tc-form-control.editTaskBox-name')),\n    15000\n);\nconst currentName = await projectNameInput.getAttribute('value');\nconst newName = currentName + '2';\nawait projectNameInput.clear();\nawait projectNameInput.sendKeys(newName);\nconsole.log(`✍️ Cambiado nombre proyecto de \"${currentName}\" a \"${newName}\".`);\nawait takeScreenshot('04-project-name-edited');\nawait sleep(2000);\n// Paso 5: Localizar el botón guardar y hacer clic\nconst saveBtn = await driver.wait(\n    until.elementLocated(By.css('a.btn.tc-btn.btn-success.editTaskBox-addBtn[data-testid=\"manage-project-save-link\"]')),\n    15000\n);\nawait saveBtn.click();\nconsole.log('✅ Clic en botón \"Save\".');\n// Paso 6: Esperar que el texto del botón cambie a \"Saving...\" y luego vuelva a \"Save\"\nawait driver.wait(async () => {\n    const text = await saveBtn.getText();\n    return text.toLowerCase().includes('saving');\n}, 10000);\nawait driver.wait(async () => {\n    const text = await saveBtn.getText();\n    return text.toLowerCase().includes('save');\n}, 10000);\nconsole.log('✅ Proyecto guardado exitosamente.');\nawait takeScreenshot('05-project-edited');\nconsole.log('--- PRUEBA DE EDICIÓN DE PROYECTO FINALIZADA ---');",
+              "err": {},
+              "uuid": "4cb6873b-0b5d-4eb4-bf38-b99ca55f83e1",
+              "parentUUID": "ba96d1a4-3100-4419-85c9-d061d65ce788",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4cb6873b-0b5d-4eb4-bf38-b99ca55f83e1"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 18918,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 120000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 30000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "edit-projects-report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "edit-projects-report",
+        "overwrite": "false"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

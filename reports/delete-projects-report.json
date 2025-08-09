@@ -1,0 +1,142 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-08-08T23:46:46.412Z",
+    "end": "2025-08-08T23:47:09.965Z",
+    "duration": 23553,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d9c02d4b-841e-4bb4-b9e1-d14ab946e37d",
+      "title": "",
+      "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Delete-proyects.spec.js",
+      "file": "\\tests\\Delete-proyects.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "e954d084-0a43-46bb-9405-a7f034f757e1",
+          "title": "Funcionalidad de Eliminación de Proyecto en Timecamp",
+          "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Delete-proyects.spec.js",
+          "file": "\\tests\\Delete-proyects.spec.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Funcionalidad de Eliminación de Proyecto en Timecamp\"",
+              "fullTitle": "Funcionalidad de Eliminación de Proyecto en Timecamp \"before all\" hook in \"Funcionalidad de Eliminación de Proyecto en Timecamp\"",
+              "timedOut": false,
+              "duration": 677,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeService(service)\n    .build();",
+              "err": {},
+              "uuid": "8c353a68-c952-4c00-9b05-d36f14f94b30",
+              "parentUUID": "e954d084-0a43-46bb-9405-a7f034f757e1",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Funcionalidad de Eliminación de Proyecto en Timecamp\"",
+              "fullTitle": "Funcionalidad de Eliminación de Proyecto en Timecamp \"after all\" hook in \"Funcionalidad de Eliminación de Proyecto en Timecamp\"",
+              "timedOut": false,
+              "duration": 225,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (driver) await driver.quit();",
+              "err": {},
+              "uuid": "b044785e-a674-4fe4-9fc0-8095e4624fce",
+              "parentUUID": "e954d084-0a43-46bb-9405-a7f034f757e1",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Debe eliminar el primer proyecto visible correctamente",
+              "fullTitle": "Funcionalidad de Eliminación de Proyecto en Timecamp Debe eliminar el primer proyecto visible correctamente",
+              "timedOut": false,
+              "duration": 22646,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "console.log('\\n--- INICIANDO PRUEBA DE ELIMINACIÓN DE PROYECTO ---');\n// Paso 1: Iniciar sesión (sin capturas)\nawait driver.get('https://app.timecamp.com/auth/login');\nconst emailInput = await driver.wait(until.elementLocated(By.id('email')), 15000);\nconst passwordInput = await driver.wait(until.elementLocated(By.id('pass_hash')), 15000);\nawait emailInput.sendKeys('penp57981@gmail.com');\nawait passwordInput.sendKeys('Preubatarea4...');\nconst loginButton = await driver.wait(until.elementLocated(By.css('button[type=\"submit\"]')), 10000);\nawait loginButton.click();\nawait driver.wait(until.urlContains('https://app.timecamp.com/app#/timesheets/timer'), 20000);\nconsole.log('✅ Inicio de sesión exitoso.');\nawait sleep(2000);\n// Paso 2: Navegar a proyectos\nawait driver.executeScript(`\n  const mainMenuDiv = document.querySelector('div#main-menu-v');\n  if (!mainMenuDiv) throw new Error('No existe div#main-menu-v');\n  const sidebar = mainMenuDiv.querySelector('web-main-sidebar');\n  if (!sidebar) throw new Error('No existe web-main-sidebar');\n  const shadowRoot = sidebar.shadowRoot;\n  if (!shadowRoot) throw new Error('No existe shadowRoot en web-main-sidebar');\n  const projectsLink = shadowRoot.querySelector('a[href=\"/time_tracking/manage\"]');\n  if (!projectsLink) throw new Error('No se encontró enlace de proyectos');\n  projectsLink.click();\n`);\nawait driver.wait(until.urlContains('/time_tracking/manage'), 15000);\nconsole.log('✅ Se ha llegado a la página de Proyectos.');\nawait takeScreenshot('01-projects-page-before-delete');\nawait sleep(2000);\n// Paso 3: Hacer click en el primer proyecto para abrir menú lateral\nconst firstProjectDiv = await driver.wait(\n    until.elementLocated(By.css('div.tc-ui-task-name.tc-ui-task-name-clickable')),\n    15000\n);\nawait firstProjectDiv.click();\nconsole.log('✅ Se hizo click en el primer proyecto para abrir menú lateral.');\nawait takeScreenshot('02-project-menu-opened');\nawait sleep(1500);\n// Paso 4: Hacer click en el botón con data-testid=\"view-more-actions\" para abrir menú desplegable\nconst menuButton = await driver.wait(\n    until.elementLocated(By.css('button[data-testid=\"view-more-actions\"]')),\n    10000\n);\nawait menuButton.click();\nconsole.log('✅ Se hizo click en el botón de más acciones para desplegar menú.');\nawait sleep(1500);\nawait takeScreenshot('03-menu-more-actions-opened');\n// Paso 5: Hacer click en el enlace \"Delete\" dentro del menú desplegable\nconst deleteLink = await driver.wait(\n    until.elementLocated(By.css('a.task-btn-delete[data-testid=\"project-action-delete\"]')),\n    10000\n);\nawait deleteLink.click();\nconsole.log('✅ Se hizo click en \"Delete\" para abrir modal de confirmación.');\nawait sleep(1500);\nawait takeScreenshot('04-delete-modal-opened');\n// Paso 6: En el modal, hacer click en el botón \"Delete project\" para confirmar\nconst confirmDeleteBtn = await driver.wait(\n    until.elementLocated(By.css('button.btn.btn-success[data-bb-handler=\"confirm\"]')),\n    10000\n);\nawait confirmDeleteBtn.click();\nconsole.log('✅ Se hizo click en \"Delete project\" para confirmar la eliminación.');\nawait sleep(3000); // Pausa para que se complete la eliminación\nawait takeScreenshot('05-project-deleted');\nconsole.log('--- PRUEBA DE ELIMINACIÓN DE PROYECTO FINALIZADA ---');",
+              "err": {},
+              "uuid": "f66ac9dc-1ed5-4210-9b07-4e39612265f5",
+              "parentUUID": "e954d084-0a43-46bb-9405-a7f034f757e1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f66ac9dc-1ed5-4210-9b07-4e39612265f5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 22646,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 120000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 30000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "delete-projects-report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "delete-projects-report",
+        "overwrite": "false"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
