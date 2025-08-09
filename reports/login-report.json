@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2025-08-09T00:24:25.927Z",
-    "end": "2025-08-09T00:24:35.708Z",
-    "duration": 9781,
+    "start": "2025-08-09T00:40:46.940Z",
+    "end": "2025-08-09T00:40:58.219Z",
+    "duration": 11279,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "3886a586-5bbf-4b0f-a203-d605ca640738",
+      "uuid": "adddd3b7-bd70-4501-b687-ccff60980f38",
       "title": "",
       "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\login.spec.js",
       "file": "\\tests\\login.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "dbee78a9-7e6d-490a-963d-a7f90bca9fb2",
+          "uuid": "ae9514d9-667d-41ec-861d-28ba374df2ad",
           "title": "Funcionalidad de Inicio de Sesión en Timecamp",
           "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\login.spec.js",
           "file": "\\tests\\login.spec.js",
@@ -36,7 +36,7 @@
               "title": "\"before all\" hook in \"Funcionalidad de Inicio de Sesión en Timecamp\"",
               "fullTitle": "Funcionalidad de Inicio de Sesión en Timecamp \"before all\" hook in \"Funcionalidad de Inicio de Sesión en Timecamp\"",
               "timedOut": false,
-              "duration": 617,
+              "duration": 695,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "driver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeService(service)\n    .build();",
               "err": {},
-              "uuid": "1994e0cc-7f74-4e12-b4b6-a39391dccfd7",
-              "parentUUID": "dbee78a9-7e6d-490a-963d-a7f90bca9fb2",
+              "uuid": "af63c164-3141-480b-bec2-cbaff3a94f5a",
+              "parentUUID": "ae9514d9-667d-41ec-861d-28ba374df2ad",
               "isHook": true,
               "skipped": false
             }
@@ -56,7 +56,7 @@
               "title": "\"after all\" hook in \"Funcionalidad de Inicio de Sesión en Timecamp\"",
               "fullTitle": "Funcionalidad de Inicio de Sesión en Timecamp \"after all\" hook in \"Funcionalidad de Inicio de Sesión en Timecamp\"",
               "timedOut": false,
-              "duration": 575,
+              "duration": 150,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "if (driver) await driver.quit();",
               "err": {},
-              "uuid": "7bd2d92b-8abe-4ae2-b1c8-bd77433a0f6b",
-              "parentUUID": "dbee78a9-7e6d-490a-963d-a7f90bca9fb2",
+              "uuid": "71653768-e0f2-4797-9b4c-b34e4c07bb22",
+              "parentUUID": "ae9514d9-667d-41ec-861d-28ba374df2ad",
               "isHook": true,
               "skipped": false
             }
@@ -76,7 +76,7 @@
               "title": "Camino fallido: credenciales incorrectas",
               "fullTitle": "Funcionalidad de Inicio de Sesión en Timecamp Camino fallido: credenciales incorrectas",
               "timedOut": false,
-              "duration": 2432,
+              "duration": 3351,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -85,8 +85,8 @@
               "context": null,
               "code": "console.log('\\n--- PRUEBA LOGIN FALLIDO ---');\nawait driver.get('https://app.timecamp.com/auth/login');\nconst emailInput = await driver.wait(until.elementLocated(By.id('email')), 15000);\nconst passwordInput = await driver.wait(until.elementLocated(By.id('pass_hash')), 15000);\nawait emailInput.sendKeys('usuario_inexistente@mail.com');\nawait passwordInput.sendKeys('ClaveIncorrecta123');\nawait takeScreenshot('01-login-invalid-filled');\nconst loginButton = await driver.wait(until.elementLocated(By.css('button[type=\"submit\"]')), 10000);\nawait loginButton.click();\nconst errorElement = await driver.wait(\n    until.elementLocated(By.css('.FormField__error-message-text.whitespace-break-spaces')),\n    10000\n);\nconst errorText = await errorElement.getText();\nexpect(errorText.trim()).to.include('email and password combination is incorrect');\nawait takeScreenshot('02-login-failed-message');\nconsole.log(`Login fallido como se esperaba. Mensaje mostrado: \"${errorText}\"`);",
               "err": {},
-              "uuid": "727d3cde-4b49-4f2b-b07e-c4a86d21a39a",
-              "parentUUID": "dbee78a9-7e6d-490a-963d-a7f90bca9fb2",
+              "uuid": "70f84bf9-2a2b-4fe0-95cf-3c1838ddead0",
+              "parentUUID": "ae9514d9-667d-41ec-861d-28ba374df2ad",
               "isHook": false,
               "skipped": false
             },
@@ -94,7 +94,7 @@
               "title": "Debe iniciar sesión correctamente en Timecamp (camino feliz)",
               "fullTitle": "Funcionalidad de Inicio de Sesión en Timecamp Debe iniciar sesión correctamente en Timecamp (camino feliz)",
               "timedOut": false,
-              "duration": 6152,
+              "duration": 7073,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -103,21 +103,21 @@
               "context": null,
               "code": "console.log('\\n--- PRUEBA LOGIN EXITOSO ---');\nawait driver.get('https://app.timecamp.com/auth/login');\nconst emailInput = await driver.wait(until.elementLocated(By.id('email')), 15000);\nconst passwordInput = await driver.wait(until.elementLocated(By.id('pass_hash')), 15000);\nawait emailInput.sendKeys('penp57981@gmail.com');\nawait passwordInput.sendKeys('Preubatarea4...');\nawait takeScreenshot('01-login-form-filled');\nconst loginButton = await driver.wait(until.elementLocated(By.css('button[type=\"submit\"]')), 10000);\nawait loginButton.click();\nawait driver.wait(until.urlContains('https://app.timecamp.com/app#/timesheets/timer'), 20000);\nconst pageTitle = await driver.getTitle();\nexpect(pageTitle).to.include('Timer Timesheet | TimeCamp');\nawait takeScreenshot('02-successful-login');\nconsole.log('Inicio de sesión exitoso.');",
               "err": {},
-              "uuid": "665034cb-db36-448f-8ec8-682c577e1826",
-              "parentUUID": "dbee78a9-7e6d-490a-963d-a7f90bca9fb2",
+              "uuid": "1e890f84-433a-4eae-bb4c-ec0a51baa6f2",
+              "parentUUID": "ae9514d9-667d-41ec-861d-28ba374df2ad",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "727d3cde-4b49-4f2b-b07e-c4a86d21a39a",
-            "665034cb-db36-448f-8ec8-682c577e1826"
+            "70f84bf9-2a2b-4fe0-95cf-3c1838ddead0",
+            "1e890f84-433a-4eae-bb4c-ec0a51baa6f2"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 8584,
+          "duration": 10424,
           "root": false,
           "rootEmpty": false,
           "_timeout": 60000

@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2025-08-09T00:25:05.281Z",
-    "end": "2025-08-09T00:25:17.956Z",
-    "duration": 12675,
+    "start": "2025-08-09T00:41:27.681Z",
+    "end": "2025-08-09T00:41:43.870Z",
+    "duration": 16189,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "ed344e28-d5cb-4064-a77e-7a026184e1dc",
+      "uuid": "e49a3d1a-dfee-48cd-929f-7872cd578f75",
       "title": "",
       "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Create-proyects.spec.js",
       "file": "\\tests\\Create-proyects.spec.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "ee810e8d-c539-4e7d-b75a-8d49c3373bb1",
+          "uuid": "88389f1b-c1d4-4fe4-b105-5315d3733264",
           "title": "Funcionalidad de Creación de Proyecto en Timecamp",
           "fullFile": "C:\\Users\\tutan\\Tarea-4-Selenium\\tests\\Create-proyects.spec.js",
           "file": "\\tests\\Create-proyects.spec.js",
@@ -36,7 +36,7 @@
               "title": "\"before all\" hook in \"Funcionalidad de Creación de Proyecto en Timecamp\"",
               "fullTitle": "Funcionalidad de Creación de Proyecto en Timecamp \"before all\" hook in \"Funcionalidad de Creación de Proyecto en Timecamp\"",
               "timedOut": false,
-              "duration": 703,
+              "duration": 889,
               "state": null,
               "speed": null,
               "pass": false,
@@ -45,8 +45,8 @@
               "context": null,
               "code": "driver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeService(service)\n    .build();",
               "err": {},
-              "uuid": "fa3978af-1614-438d-9296-f9d3b265fd41",
-              "parentUUID": "ee810e8d-c539-4e7d-b75a-8d49c3373bb1",
+              "uuid": "76898fba-887d-451a-92d8-6eff376bd99f",
+              "parentUUID": "88389f1b-c1d4-4fe4-b105-5315d3733264",
               "isHook": true,
               "skipped": false
             }
@@ -56,7 +56,7 @@
               "title": "\"after all\" hook in \"Funcionalidad de Creación de Proyecto en Timecamp\"",
               "fullTitle": "Funcionalidad de Creación de Proyecto en Timecamp \"after all\" hook in \"Funcionalidad de Creación de Proyecto en Timecamp\"",
               "timedOut": false,
-              "duration": 377,
+              "duration": 83,
               "state": null,
               "speed": null,
               "pass": false,
@@ -65,8 +65,8 @@
               "context": null,
               "code": "if (driver) await driver.quit();",
               "err": {},
-              "uuid": "e771e926-ae5e-42f4-8d67-3c60bdad7950",
-              "parentUUID": "ee810e8d-c539-4e7d-b75a-8d49c3373bb1",
+              "uuid": "ab95f710-e23c-4f1f-9567-ca441774cb61",
+              "parentUUID": "88389f1b-c1d4-4fe4-b105-5315d3733264",
               "isHook": true,
               "skipped": false
             }
@@ -76,7 +76,7 @@
               "title": "Debe iniciar sesión y crear un nuevo proyecto con éxito",
               "fullTitle": "Funcionalidad de Creación de Proyecto en Timecamp Debe iniciar sesión y crear un nuevo proyecto con éxito",
               "timedOut": false,
-              "duration": 11590,
+              "duration": 15206,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -85,20 +85,20 @@
               "context": null,
               "code": "console.log('\\n--- INICIANDO PRUEBA DE CREACIÓN DE PROYECTO EN TIMECAMP ---');\n\n       \nawait driver.get('https://app.timecamp.com/auth/login');\nconsole.log('Navegando a la página de inicio de sesión de Timecamp.');\n\n      \nconsole.log('Localizando campos de email y contraseña...');\nconst emailInput = await driver.wait(until.elementLocated(By.id('email')), 15000);\nconst passwordInput = await driver.wait(until.elementLocated(By.id('pass_hash')), 15000);\n\nawait emailInput.sendKeys('penp57981@gmail.com');\nawait passwordInput.sendKeys('Preubatarea4...');\nconsole.log('Credenciales de acceso introducidas.');\nawait takeScreenshot('01-login-form-filled');\n\n       \nconsole.log('Localizando y haciendo clic en el botón de inicio de sesión...');\nconst loginButton = await driver.wait(until.elementLocated(By.css('button[type=\"submit\"]')), 10000);\nawait loginButton.click();\nconsole.log('Clic en el botón \"Log In\".');\n\nconsole.log('Verificando el inicio de sesión y la carga de la página principal...');\nawait driver.wait(until.urlContains('https://app.timecamp.com/app#/timesheets/timer'), 30000);\nconst pageTitle = await driver.getTitle();\nexpect(pageTitle).to.include('Timer Timesheet | TimeCamp');\nconsole.log('Inicio de sesión exitoso. Se ha llegado al dashboard.');\nawait takeScreenshot('02-successful-login');\n\nconsole.log('Navegando a la sección de Proyectos...');\nawait driver.executeScript(`\n  const mainMenuDiv = document.querySelector('div#main-menu-v');\n  if (!mainMenuDiv) throw new Error('No existe div#main-menu-v');\n  \n  const sidebar = mainMenuDiv.querySelector('web-main-sidebar');\n  if (!sidebar) throw new Error('No existe web-main-sidebar');\n  \n  const shadowRoot = sidebar.shadowRoot;\n  if (!shadowRoot) throw new Error('No existe shadowRoot en web-main-sidebar');\n  \n  const projectsLink = shadowRoot.querySelector('a[href=\"/time_tracking/manage\"]');\n  if (!projectsLink) throw new Error('No se encontró enlace de proyectos');\n  \n  projectsLink.click();\n`);\nawait driver.wait(until.urlContains('https://app.timecamp.com/time_tracking/manage'), 30000);\nconsole.log('Se ha llegado a la página de Proyectos.');\nawait takeScreenshot('04-projects-page');\n\n       \nconsole.log('Haciendo clic en el botón \"New project\"...');\nconst newProjectButton = await driver.wait(until.elementLocated(By.css('#newTaskBtn')), 15000);\nawait driver.wait(async () => {\n    const displayed = await newProjectButton.isDisplayed();\n    const pointerEvents = await driver.executeScript(\n        'return window.getComputedStyle(arguments[0]).getPropertyValue(\"pointer-events\");',\n        newProjectButton\n    );\n    return displayed && pointerEvents !== 'none';\n}, 15000, 'El botón \"New project\" no está listo para interactuar');\nawait newProjectButton.click();\nconsole.log('Clic en \"New project\".');\n\nconst projectName = 'Prueba-test1';\nconsole.log(`Rellenando el nombre del proyecto: \"${projectName}\"...`);\nconst projectNameInput = await driver.wait(until.elementLocated(By.id('new-task-name-input')), 10000);\nawait projectNameInput.sendKeys(projectName);\nconsole.log('Nombre del proyecto introducido.');\nawait takeScreenshot('05-new-project-input-filled');\n\nconsole.log('Haciendo clic en el botón para crear el proyecto...');\nconst createProjectButton = await driver.wait(until.elementLocated(By.css('[data-testid=\"new-task-btn-apply\"]')), 10000);\nawait createProjectButton.click();\nconsole.log('Clic en \"Create new project\".');\n\nconsole.log('Verificando que el proyecto aparezca en la lista...');\nconst createdProject = await driver.wait(until.elementLocated(By.xpath(`//span[text()=\"${projectName}\"]`)), 20000);\nexpect(await createdProject.isDisplayed()).to.be.true;\nconsole.log(`Verificación exitosa. El proyecto \"${projectName}\" es visible en la lista.`);\nawait takeScreenshot('06-project-created');\nconsole.log('--- PRUEBA DE CREACIÓN DE PROYECTO EN TIMECAMP FINALIZADA CON ÉXITO ---');",
               "err": {},
-              "uuid": "e8ca8d2f-12c0-4aec-b4cd-52c9df0b1df1",
-              "parentUUID": "ee810e8d-c539-4e7d-b75a-8d49c3373bb1",
+              "uuid": "d584ad67-8152-4061-8579-57c6a41f0647",
+              "parentUUID": "88389f1b-c1d4-4fe4-b105-5315d3733264",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "e8ca8d2f-12c0-4aec-b4cd-52c9df0b1df1"
+            "d584ad67-8152-4061-8579-57c6a41f0647"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 11590,
+          "duration": 15206,
           "root": false,
           "rootEmpty": false,
           "_timeout": 90000
